@@ -6,5 +6,6 @@
         public string ServiceName { get; set; }
         public int SpecializationId { get; set; }
         public int DoctorId { get; set; }
+        public int CostService { get; set; }
     }
 }
