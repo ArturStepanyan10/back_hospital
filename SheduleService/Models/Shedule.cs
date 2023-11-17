@@ -2,7 +2,7 @@
 {
     public class Shedule
     {
-        public int Id { get; set; }
+        public int SheduleId { get; set; }
         public int DoctorId { get; set; }
         public string Day { get; set; }
         public string Time { get; set; }

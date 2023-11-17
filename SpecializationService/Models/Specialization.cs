@@ -2,7 +2,7 @@
 {
     public class Specialization
     {
-        public int Id { get; set; }
+        public int SpecializationId { get; set; }
         public string SpecialName { get; set; }
     }
 }

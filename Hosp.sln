@@ -17,9 +17,11 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AdminService", "AdminServic
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CompositeService", "CompositeService\CompositeService.csproj", "{18C5528C-A0ED-4BB0-89F6-F92EABB50FAA}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UserService", "UserService\UserService.csproj", "{A1ED40AA-473A-4B33-A0FE-E1D24D045562}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "UserService", "UserService\UserService.csproj", "{A1ED40AA-473A-4B33-A0FE-E1D24D045562}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PatientService", "PatientService\PatientService.csproj", "{46951D90-D629-476B-8BE0-86EC26B3E51F}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PatientService", "PatientService\PatientService.csproj", "{46951D90-D629-476B-8BE0-86EC26B3E51F}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MedicalReportService", "MedicalRepoertService\MedicalReportService.csproj", "{99F08BB2-6493-48C8-9F7D-1A521AAAACE3}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -63,6 +65,10 @@ Global
 		{46951D90-D629-476B-8BE0-86EC26B3E51F}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{46951D90-D629-476B-8BE0-86EC26B3E51F}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{46951D90-D629-476B-8BE0-86EC26B3E51F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{99F08BB2-6493-48C8-9F7D-1A521AAAACE3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{99F08BB2-6493-48C8-9F7D-1A521AAAACE3}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{99F08BB2-6493-48C8-9F7D-1A521AAAACE3}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{99F08BB2-6493-48C8-9F7D-1A521AAAACE3}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
