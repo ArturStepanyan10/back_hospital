@@ -55,7 +55,7 @@ namespace ServiceMicService.Controllers
         [HttpPut("{id}")]
         public async Task<IActionResult> PutService(int id, Service service)
         {
-            if (id != service.Id)
+            if (id != service.ServiceId)
             {
                 return BadRequest();
             }
@@ -93,7 +93,7 @@ namespace ServiceMicService.Controllers
             _context.services.Add(service);
             await _context.SaveChangesAsync();
 
-            return CreatedAtAction("GetService", new { id = service.Id }, service);
+            return CreatedAtAction("GetService", new { id = service.ServiceId }, service);
         }
 
         // DELETE: api/Services/5
@@ -118,7 +118,7 @@ namespace ServiceMicService.Controllers
 
         private bool ServiceExists(int id)
         {
-            return (_context.services?.Any(e => e.Id == id)).GetValueOrDefault();
+            return (_context.services?.Any(e => e.ServiceId == id)).GetValueOrDefault();
         }
     }
 }

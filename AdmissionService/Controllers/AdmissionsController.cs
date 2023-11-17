@@ -55,7 +55,7 @@ namespace AdmissionService.Controllers
         [HttpPut("{id}")]
         public async Task<IActionResult> PutAdmission(int id, Admission admission)
         {
-            if (id != admission.Id)
+            if (id != admission.AdmissionId)
             {
                 return BadRequest();
             }
@@ -93,7 +93,7 @@ namespace AdmissionService.Controllers
             _context.admissions.Add(admission);
             await _context.SaveChangesAsync();
 
-            return CreatedAtAction("GetAdmission", new { id = admission.Id }, admission);
+            return CreatedAtAction("GetAdmission", new { id = admission.AdmissionId }, admission);
         }
 
         // DELETE: api/Admissions/5
@@ -118,7 +118,7 @@ namespace AdmissionService.Controllers
 
         private bool AdmissionExists(int id)
         {
-            return (_context.admissions?.Any(e => e.Id == id)).GetValueOrDefault();
+            return (_context.admissions?.Any(e => e.AdmissionId == id)).GetValueOrDefault();
         }
     }
 }

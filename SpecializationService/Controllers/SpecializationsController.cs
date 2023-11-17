@@ -55,7 +55,7 @@ namespace SpecializationService.Controllers
         [HttpPut("{id}")]
         public async Task<IActionResult> PutSpecialization(int id, Specialization specialization)
         {
-            if (id != specialization.Id)
+            if (id != specialization.SpecializationId)
             {
                 return BadRequest();
             }
@@ -93,7 +93,7 @@ namespace SpecializationService.Controllers
             _context.specials.Add(specialization);
             await _context.SaveChangesAsync();
 
-            return CreatedAtAction("GetSpecialization", new { id = specialization.Id }, specialization);
+            return CreatedAtAction("GetSpecialization", new { id = specialization.SpecializationId }, specialization);
         }
 
         // DELETE: api/Specializations/5
@@ -118,7 +118,7 @@ namespace SpecializationService.Controllers
 
         private bool SpecializationExists(int id)
         {
-            return (_context.specials?.Any(e => e.Id == id)).GetValueOrDefault();
+            return (_context.specials?.Any(e => e.SpecializationId == id)).GetValueOrDefault();
         }
     }
 }
