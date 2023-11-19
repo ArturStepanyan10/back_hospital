@@ -2,6 +2,7 @@
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using SheduleService.Data;
 
@@ -10,9 +11,11 @@ using SheduleService.Data;
 namespace SheduleService.Migrations
 {
     [DbContext(typeof(SheduleDbContext))]
-    partial class SheduleDbContextModelSnapshot : ModelSnapshot
+    [Migration("20231118121613_UpShed")]
+    partial class UpShed
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -32,8 +35,9 @@ namespace SheduleService.Migrations
                     b.Property<int>("AdmissionId")
                         .HasColumnType("int");
 
-                    b.Property<int>("DayOfWeek")
-                        .HasColumnType("int");
+                    b.Property<string>("Day")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<int>("DoctorId")
                         .HasColumnType("int");

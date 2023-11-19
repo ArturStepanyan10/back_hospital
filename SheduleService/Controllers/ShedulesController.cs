@@ -55,7 +55,7 @@ namespace SheduleService.Controllers
         [HttpPut("{id}")]
         public async Task<IActionResult> PutShedule(int id, Shedule shedule)
         {
-            if (id != shedule.SheduleId)
+            if (id != shedule.Id)
             {
                 return BadRequest();
             }
@@ -93,7 +93,7 @@ namespace SheduleService.Controllers
             _context.shedules.Add(shedule);
             await _context.SaveChangesAsync();
 
-            return CreatedAtAction("GetShedule", new { id = shedule.SheduleId }, shedule);
+            return CreatedAtAction("GetShedule", new { id = shedule.Id }, shedule);
         }
 
         // DELETE: api/Shedules/5
@@ -118,7 +118,7 @@ namespace SheduleService.Controllers
 
         private bool SheduleExists(int id)
         {
-            return (_context.shedules?.Any(e => e.SheduleId == id)).GetValueOrDefault();
+            return (_context.shedules?.Any(e => e.Id == id)).GetValueOrDefault();
         }
     }
 }

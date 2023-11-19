@@ -2,6 +2,7 @@
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using SheduleService.Data;
 
@@ -10,9 +11,11 @@ using SheduleService.Data;
 namespace SheduleService.Migrations
 {
     [DbContext(typeof(SheduleDbContext))]
-    partial class SheduleDbContextModelSnapshot : ModelSnapshot
+    [Migration("20231118141913_NewColDay")]
+    partial class NewColDay
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
