@@ -1,6 +1,6 @@
-﻿namespace AdmissionService.Models
+﻿namespace CompositeService.Models
 {
-    public class Admission
+    public class AdmissionCos
     {
         public int Id { get; set; }
         public int PatientId { get; set; }

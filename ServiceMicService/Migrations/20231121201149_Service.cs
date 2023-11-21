@@ -5,7 +5,7 @@
 namespace ServiceMicService.Migrations
 {
     /// <inheritdoc />
-    public partial class AddServiceDB : Migration
+    public partial class Service : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -18,7 +18,9 @@ namespace ServiceMicService.Migrations
                         .Annotation("SqlServer:Identity", "1, 1"),
                     ServiceName = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     SpecializationId = table.Column<int>(type: "int", nullable: false),
-                    DoctorId = table.Column<int>(type: "int", nullable: false)
+                    DoctorId = table.Column<int>(type: "int", nullable: false),
+                    Time = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    CostService = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
                 {

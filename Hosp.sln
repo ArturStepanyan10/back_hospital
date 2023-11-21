@@ -7,8 +7,6 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DocService", "DocService\Do
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SheduleService", "SheduleService\SheduleService.csproj", "{EF859B9B-317F-4FF0-9952-CFA1D96927D2}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ServiceMicService", "ServiceMicService\ServiceMicService.csproj", "{7652DF26-28C8-4CD3-91D4-E53821CE17AD}"
-EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AdmissionService", "AdmissionService\AdmissionService.csproj", "{1DE53876-E92C-483D-9BD4-EC7F761D2CF7}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SpecializationService", "SpecializationService\SpecializationService.csproj", "{4218EDF9-ABA8-4C42-BD8F-B10AE37A47D6}"
@@ -21,7 +19,9 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "UserService", "UserService\
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PatientService", "PatientService\PatientService.csproj", "{46951D90-D629-476B-8BE0-86EC26B3E51F}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MedicalReportService", "MedicalRepoertService\MedicalReportService.csproj", "{99F08BB2-6493-48C8-9F7D-1A521AAAACE3}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MedicalReportService", "MedicalRepoertService\MedicalReportService.csproj", "{99F08BB2-6493-48C8-9F7D-1A521AAAACE3}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ServiceMicService", "ServiceMicService\ServiceMicService.csproj", "{9FF8F7C5-6B5C-4024-8AE0-315125867A0E}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -37,10 +37,6 @@ Global
 		{EF859B9B-317F-4FF0-9952-CFA1D96927D2}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{EF859B9B-317F-4FF0-9952-CFA1D96927D2}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{EF859B9B-317F-4FF0-9952-CFA1D96927D2}.Release|Any CPU.Build.0 = Release|Any CPU
-		{7652DF26-28C8-4CD3-91D4-E53821CE17AD}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{7652DF26-28C8-4CD3-91D4-E53821CE17AD}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{7652DF26-28C8-4CD3-91D4-E53821CE17AD}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{7652DF26-28C8-4CD3-91D4-E53821CE17AD}.Release|Any CPU.Build.0 = Release|Any CPU
 		{1DE53876-E92C-483D-9BD4-EC7F761D2CF7}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{1DE53876-E92C-483D-9BD4-EC7F761D2CF7}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{1DE53876-E92C-483D-9BD4-EC7F761D2CF7}.Release|Any CPU.ActiveCfg = Release|Any CPU
@@ -69,6 +65,10 @@ Global
 		{99F08BB2-6493-48C8-9F7D-1A521AAAACE3}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{99F08BB2-6493-48C8-9F7D-1A521AAAACE3}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{99F08BB2-6493-48C8-9F7D-1A521AAAACE3}.Release|Any CPU.Build.0 = Release|Any CPU
+		{9FF8F7C5-6B5C-4024-8AE0-315125867A0E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9FF8F7C5-6B5C-4024-8AE0-315125867A0E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9FF8F7C5-6B5C-4024-8AE0-315125867A0E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9FF8F7C5-6B5C-4024-8AE0-315125867A0E}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

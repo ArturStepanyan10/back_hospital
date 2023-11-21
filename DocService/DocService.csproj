@@ -26,6 +26,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\AdmissionService\AdmissionService.csproj" />
     <ProjectReference Include="..\SheduleService\SheduleService.csproj" />
   </ItemGroup>
 

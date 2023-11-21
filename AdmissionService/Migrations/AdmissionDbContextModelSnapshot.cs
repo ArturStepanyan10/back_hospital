@@ -44,6 +44,10 @@ namespace AdmissionService.Migrations
                     b.Property<int>("SheduleId")
                         .HasColumnType("int");
 
+                    b.Property<string>("Time")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
                     b.HasKey("Id");
 
                     b.ToTable("admissions");

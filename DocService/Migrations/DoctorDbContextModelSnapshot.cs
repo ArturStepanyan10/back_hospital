@@ -50,7 +50,7 @@ namespace DocService.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("doctors");
+                    b.ToTable("doctors", (string)null);
                 });
 #pragma warning restore 612, 618
         }

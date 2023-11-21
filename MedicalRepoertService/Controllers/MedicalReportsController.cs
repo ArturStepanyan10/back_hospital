@@ -90,10 +90,20 @@ namespace MedicalReportService.Controllers
           {
               return Problem("Entity set 'MedicalReportDbContext.MedicalReports'  is null.");
           }
+
+            bool existingReport = await _context.MedicalReports.AnyAsync(report =>
+                report.AdmissionId == medicalReport.AdmissionId);
+
+            if (existingReport)
+            {
+                // Если медицинское заключение уже существует, возвращаем ошибку
+                return BadRequest("Медицинское заключение для данного приема уже существует.");
+            }
+
             _context.MedicalReports.Add(medicalReport);
             await _context.SaveChangesAsync();
 
-            return CreatedAtAction("GetMedicalReport", new { id = medicalReport.MedicalReportId }, medicalReport);
+            return Ok("Мед. заключение пациента добавлено!");
         }
 
         // DELETE: api/MedicalReports/5

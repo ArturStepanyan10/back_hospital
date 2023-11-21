@@ -6,7 +6,7 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using ServiceMicService.Data;
-using ServiceMicService.Models;
+using ServiceMicService.Model;
 
 namespace ServiceMicService.Controllers
 {
@@ -25,10 +25,6 @@ namespace ServiceMicService.Controllers
         [HttpGet]
         public async Task<ActionResult<IEnumerable<Service>>> Getservices()
         {
-          if (_context.services == null)
-          {
-              return NotFound();
-          }
             return await _context.services.ToListAsync();
         }
 
@@ -36,10 +32,6 @@ namespace ServiceMicService.Controllers
         [HttpGet("{id}")]
         public async Task<ActionResult<Service>> GetService(int id)
         {
-          if (_context.services == null)
-          {
-              return NotFound();
-          }
             var service = await _context.services.FindAsync(id);
 
             if (service == null)
@@ -86,10 +78,6 @@ namespace ServiceMicService.Controllers
         [HttpPost]
         public async Task<ActionResult<Service>> PostService(Service service)
         {
-          if (_context.services == null)
-          {
-              return Problem("Entity set 'ServiceDbContext.services'  is null.");
-          }
             _context.services.Add(service);
             await _context.SaveChangesAsync();
 
@@ -100,10 +88,6 @@ namespace ServiceMicService.Controllers
         [HttpDelete("{id}")]
         public async Task<IActionResult> DeleteService(int id)
         {
-            if (_context.services == null)
-            {
-                return NotFound();
-            }
             var service = await _context.services.FindAsync(id);
             if (service == null)
             {
@@ -118,7 +102,7 @@ namespace ServiceMicService.Controllers
 
         private bool ServiceExists(int id)
         {
-            return (_context.services?.Any(e => e.Id == id)).GetValueOrDefault();
+            return _context.services.Any(e => e.Id == id);
         }
     }
 }
