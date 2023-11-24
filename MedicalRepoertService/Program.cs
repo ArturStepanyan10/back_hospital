@@ -10,7 +10,7 @@ builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
-builder.Services.AddDbContext<MedicalReportDbContext>(opt => opt.UseSqlServer($"Data Source=(localdb)\\MSSQLLocalDB;Initial Catalog = DBMedicalReport; Integrated Security = True"));
+builder.Services.AddDbContext<MedicalReportDbContext>(opt => opt.UseSqlServer($"Data Source=(localdb)\\MSSQLLocalDB;Initial Catalog = DBMedicalReport;Integrated Security = True"));
 
 
 var app = builder.Build();

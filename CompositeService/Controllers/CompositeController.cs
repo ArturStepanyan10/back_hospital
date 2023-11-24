@@ -20,7 +20,8 @@ namespace CompositeService.Controllers
     {
         private readonly string _doctorServiceAddress = "https://localhost:7025/api/doctors";
         private readonly string _sheduleServiceAddress = "https://localhost:7163/api/shedules";
-        
+        private readonly string _patientServiceAddress = "https://localhost:44373/api/patients";
+
 
         //Возвращает список докторов заданной специализации
         [HttpGet("doctors/{SpecName}")]
@@ -119,7 +120,28 @@ namespace CompositeService.Controllers
             return null;
         }
 
+        //Возвращает пациентов заданного доктора
+        [HttpGet("patients/{doctorId}")]
+        public async Task<List<PatientComp>> GetPatientsByDoctorAsync(int doctorId)
+        {
+            HttpClientHandler clientHandler = new HttpClientHandler();
+            clientHandler.ServerCertificateCustomValidationCallback =
+            (sender, cert, chain, sslPolicyErrors) => { return true; };
+            using (HttpClient client = new HttpClient(clientHandler))
+            {
+                HttpResponseMessage response = await
+                client.GetAsync($"{_patientServiceAddress}");
+                if (response.IsSuccessStatusCode)
+                {
+                    List<PatientComp> patients = await response.Content.ReadFromJsonAsync<List<PatientComp>>();
+                    return patients.Where(patients => patients.DoctorId
+                    == doctorId).ToList();
+                }
+            }
+            return null;
+        }
     }
 }
+
 
 

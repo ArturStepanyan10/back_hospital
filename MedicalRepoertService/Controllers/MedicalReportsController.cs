@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using MedicalReportService.Data;
 using MedicalReportService.Models;
+using Microsoft.AspNetCore.Authorization;
 
 namespace MedicalReportService.Controllers
 {
@@ -84,6 +85,7 @@ namespace MedicalReportService.Controllers
         // POST: api/MedicalReports
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPost]
+        //[Authorize(Roles = "Doctor")]
         public async Task<ActionResult<MedicalReport>> PostMedicalReport(MedicalReport medicalReport)
         {
           if (_context.MedicalReports == null)
