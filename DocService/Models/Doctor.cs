@@ -8,6 +8,7 @@
         public int Experience { get; set; }
         public string Post { get; set; }
         public string SpecName { get; set; }
+        public int UserId { get; set; }
         
     }
 }

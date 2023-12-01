@@ -2,31 +2,28 @@
 
 #nullable disable
 
-namespace DocService.Migrations
+namespace AdminService.Migrations
 {
     /// <inheritdoc />
-    public partial class InitMigration : Migration
+    public partial class AddNewTable : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.CreateTable(
-                name: "doctors",
+                name: "admins",
                 columns: table => new
                 {
-                    Id = table.Column<int>(type: "int", nullable: false)
+                    AdminId = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
                     Surname = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     Name = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    Experience = table.Column<int>(type: "int", nullable: false),
-                    Post = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     Email = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    Password = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    SpecializationId = table.Column<int>(type: "int", nullable: false)
+                    Password = table.Column<string>(type: "nvarchar(max)", nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_doctors", x => x.Id);
+                    table.PrimaryKey("PK_admins", x => x.AdminId);
                 });
         }
 
@@ -34,7 +31,7 @@ namespace DocService.Migrations
         protected override void Down(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DropTable(
-                name: "doctors");
+                name: "admins");
         }
     }
 }

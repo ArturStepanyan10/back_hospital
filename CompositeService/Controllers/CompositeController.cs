@@ -1,15 +1,6 @@
 ﻿using CompositeService.Models;
 using Microsoft.AspNetCore.Mvc;
-using System.Net.Http;
-using System.Text.Json;
-using System.Threading.Tasks;
-using System.Collections.Generic;
-using System.Linq;
-using System;
 using SheduleService.Models;
-using AdmissionService.Models;
-using Microsoft.EntityFrameworkCore;
-using System.Data.Entity;
 
 
 namespace CompositeService.Controllers
@@ -140,6 +131,7 @@ namespace CompositeService.Controllers
             }
             return null;
         }
+
     }
 }
 

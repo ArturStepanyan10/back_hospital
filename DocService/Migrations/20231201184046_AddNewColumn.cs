@@ -5,7 +5,7 @@
 namespace DocService.Migrations
 {
     /// <inheritdoc />
-    public partial class DBdoctor : Migration
+    public partial class AddNewColumn : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -20,7 +20,8 @@ namespace DocService.Migrations
                     Name = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     Experience = table.Column<int>(type: "int", nullable: false),
                     Post = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    SpecializationId = table.Column<int>(type: "int", nullable: false)
+                    SpecName = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    UserId = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
                 {
