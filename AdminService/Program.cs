@@ -1,4 +1,5 @@
 using AdminService.Data;
+using DocService.Data;
 using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -11,6 +12,7 @@ builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
 builder.Services.AddDbContext<AdminDbContext>(opt => opt.UseSqlServer($"Data Source=(localdb)\\MSSQLLocalDB;Initial Catalog = DBAdmin; Integrated Security = True"));
+//builder.Services.AddScoped<DoctorDbContext>();
 
 
 var app = builder.Build();
