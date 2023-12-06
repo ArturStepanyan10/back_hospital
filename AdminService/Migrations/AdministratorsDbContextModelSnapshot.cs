@@ -9,8 +9,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace AdminService.Migrations
 {
-    [DbContext(typeof(AdminDbContext))]
-    partial class AdminDbContextModelSnapshot : ModelSnapshot
+    [DbContext(typeof(AdministratorsDbContext))]
+    partial class AdministratorsDbContextModelSnapshot : ModelSnapshot
     {
         protected override void BuildModel(ModelBuilder modelBuilder)
         {
@@ -50,7 +50,7 @@ namespace AdminService.Migrations
 
                     b.HasKey("AdminId");
 
-                    b.ToTable("admins");
+                    b.ToTable("administrators");
                 });
 #pragma warning restore 612, 618
         }

@@ -1,93 +1,124 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Threading.Tasks;
+using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
-using AdminService.Data;  
-using DocService.Data;
-using DocService.Models;
+using AdminService.Data;
+using AdminService.Models;
 
-[Route("api/admin/administrators")]
-[ApiController]
-public class AdminAdministratorsController : ControllerBase
+namespace AdminService.Controllers
 {
-    private readonly AdminDbContext _adminDbContext;
-    private readonly DoctorDbContext _docDbContext;
-
-    public AdminAdministratorsController(AdminDbContext adminDbContext, DoctorDbContext docDbContext)
+    [Route("api/[controller]")]
+    [ApiController]
+    public class AdminsController : ControllerBase
     {
-        _adminDbContext = adminDbContext;
-        _docDbContext = docDbContext;
-    }
+        private readonly AdministratorsDbContext _context;
 
-    // Получить список всех врачей
-    [HttpGet("doctors")]
-    public IActionResult GetDoctors()
-    {
-        var doctors = _docDbContext.doctors.ToList();
-        return Ok(doctors);
-    }
-
-    // Добавить нового врача
-    [HttpPost("doctors")]
-    public IActionResult AddDoctor([FromBody] Doctor doctor)
-    {
-        if (ModelState.IsValid)
+        public AdminsController(AdministratorsDbContext context)
         {
-            _docDbContext.doctors.Add(doctor);
-            _docDbContext.SaveChanges();
-            return CreatedAtAction(nameof(GetDoctors), new { id = doctor.Id }, doctor);
+            _context = context;
         }
 
-        return BadRequest(ModelState);
-    }
-
-    // Редактировать существующего врача
-    [HttpPut("doctors/{id}")]
-    public IActionResult UpdateDoctor(int id, [FromBody] Doctor doctor)
-    {
-        if (id != doctor.Id)
+        // GET: api/Admins
+        [HttpGet]
+        public async Task<ActionResult<IEnumerable<Admin>>> Getadmins()
         {
-            return BadRequest();
-        }
-
-        _docDbContext.Entry(doctor).State = EntityState.Modified;
-
-        try
-        {
-            _docDbContext.SaveChanges();
-        }
-        catch (DbUpdateConcurrencyException)
-        {
-            if (!DoctorExists(id))
+            if (_context.administrators == null)
             {
                 return NotFound();
             }
-            else
-            {
-                throw;
-            }
+            return await _context.administrators.ToListAsync();
         }
 
-        return NoContent();
-    }
-
-    // Удалить врача
-    [HttpDelete("doctors/{id}")]
-    public IActionResult DeleteDoctor(int id)
-    {
-        var doctor = _docDbContext.doctors.Find(id);
-
-        if (doctor == null)
+        // GET: api/Admins/5
+        [HttpGet("{id}")]
+        public async Task<ActionResult<Admin>> GetAdmin(int id)
         {
-            return NotFound();
+            if (_context.administrators == null)
+            {
+                return NotFound();
+            }
+            var admin = await _context.administrators.FindAsync(id);
+
+            if (admin == null)
+            {
+                return NotFound();
+            }
+
+            return admin;
         }
 
-        _docDbContext.doctors.Remove(doctor);
-        _docDbContext.SaveChanges();
+        // PUT: api/Admin/5
+        // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
+        [HttpPut("{id}")]
+        public async Task<IActionResult> PutAdmin(int id, Admin admin)
+        {
+            if (id != admin.AdminId)
+            {
+                return BadRequest();
+            }
 
-        return NoContent();
-    }
+            _context.Entry(admin).State = EntityState.Modified;
 
-    private bool DoctorExists(int id)
-    {
-        return _docDbContext.doctors.Any(e => e.Id == id);
+            try
+            {
+                await _context.SaveChangesAsync();
+            }
+            catch (DbUpdateConcurrencyException)
+            {
+                if (!AdminExists(id))
+                {
+                    return NotFound();
+                }
+                else
+                {
+                    throw;
+                }
+            }
+
+            return NoContent();
+        }
+
+        // POST: api/Admin
+        // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
+        [HttpPost]
+        public async Task<ActionResult<Admin>> PostAdmin(Admin admin)
+        {
+            if (_context.administrators == null)
+            {
+                return Problem("Entity set 'SpecialDbContext.specials'  is null.");
+            }
+            _context.administrators.Add(admin);
+            await _context.SaveChangesAsync();
+
+            return CreatedAtAction("GetSpecialization", new { id = admin.AdminId }, admin);
+        }
+
+        // DELETE: api/Admin/5
+        [HttpDelete("{id}")]
+        public async Task<IActionResult> DeleteAdmin(int id)
+        {
+            if (_context.administrators == null)
+            {
+                return NotFound();
+            }
+            var admin = await _context.administrators.FindAsync(id);
+            if (admin == null)
+            {
+                return NotFound();
+            }
+
+            _context.administrators.Remove(admin);
+            await _context.SaveChangesAsync();
+
+            return NoContent();
+        }
+
+        private bool AdminExists(int id)
+        {
+            return (_context.administrators?.Any(e => e.AdminId == id)).GetValueOrDefault();
+        }
     }
 }

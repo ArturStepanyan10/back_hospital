@@ -10,9 +10,9 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace AdminService.Migrations
 {
-    [DbContext(typeof(AdminDbContext))]
-    [Migration("20231201190443_AddNewTable")]
-    partial class AddNewTable
+    [DbContext(typeof(AdministratorsDbContext))]
+    [Migration("20231206000527_DbAdmin")]
+    partial class DbAdmin
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -48,9 +48,12 @@ namespace AdminService.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<int>("UserId")
+                        .HasColumnType("int");
+
                     b.HasKey("AdminId");
 
-                    b.ToTable("admins");
+                    b.ToTable("administrators");
                 });
 #pragma warning restore 612, 618
         }

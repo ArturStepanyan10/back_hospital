@@ -84,7 +84,7 @@ namespace AdmissionService.Controllers
         // POST: api/Admissions
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPost]
-        [Authorize(Roles = "Patient")]
+        //[Authorize(Roles = "Patient")]
         public async Task<ActionResult<Admission>> PostAdmission(Admission admission)
         {
           if (_context.admissions == null)
