@@ -1,5 +1,6 @@
 using AdmissionService.Data;
 using Microsoft.EntityFrameworkCore;
+using SheduleService.Data;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -12,7 +13,7 @@ builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
 builder.Services.AddDbContext<AdmissionDbContext>(opt => opt.UseSqlServer($"Data Source=(localdb)\\MSSQLLocalDB;Initial Catalog = DBAdmission; Integrated Security = True"));
-
+builder.Services.AddDbContext<SheduleDbContext>(opt => opt.UseSqlServer($"Data Source=(localdb)\\MSSQLLocalDB;Initial Catalog=DBShedule;Integrated Security=True"));
 
 var app = builder.Build();
 

@@ -23,43 +23,58 @@ namespace DocService.Controllers
             _context = context;
         }
 
-        // GET: api/Doctors
+        // GET: api/Doctors ONLY ADMIN
         [HttpGet]
         public async Task<ActionResult<IEnumerable<Doctor>>> Getdoctors()
         {
           if (_context.doctors == null)
           {
-              return NotFound();
+              return NotFound("Записей не найдено");
           }
             return await _context.doctors.ToListAsync();
         }
 
-        // GET: api/Doctors/5
+        // GET: api/Doctors/5 ONLY ADMIN
         [HttpGet("{id}")]
         public async Task<ActionResult<Doctor>> GetDoctor(int id)
         {
-          if (_context.doctors == null)
-          {
-              return NotFound();
-          }
-            var doctor = await _context.doctors.FindAsync(id);
-
-            if (doctor == null)
+            if (id <= 0)
             {
-                return NotFound();
+                return BadRequest("Неверный идентификатор!");
             }
 
-            return doctor;
+            try
+            {
+
+                if (_context.doctors == null)
+                {
+                    return NotFound("Записей не найдено");
+                }
+                var doctor = await _context.doctors.FindAsync(id);
+
+                if (doctor == null)
+                {
+                    return NotFound($"Запись доктора с ID {id} не найдена");
+                }
+
+                return doctor;
+            }
+
+            catch (Exception)
+            {
+                // Логирование ошибки или другие действия по обработке ошибки
+                return StatusCode(500, "Internal Server Error");
+            }
         }
 
-        // PUT: api/Doctors/5
+        // PUT: api/Doctors/5 ONLY ADMIN
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPut("{id}")]
         public async Task<IActionResult> PutDoctor(int id, Doctor doctor)
         {
             if (id != doctor.Id)
             {
-                return BadRequest();
+                return BadRequest($"Данное ID {id} не найдено!");
             }
 
             _context.Entry(doctor).State = EntityState.Modified;
@@ -72,18 +87,18 @@ namespace DocService.Controllers
             {
                 if (!DoctorExists(id))
                 {
-                    return NotFound();
+                    return NotFound($"Запись доктора с ID {id} не найдена");
                 }
                 else
                 {
-                    throw;
+                    return StatusCode(409, "Произошел конфликт. Пожалуйста, обновите данные и повторите попытку.");
                 }
             }
 
-            return NoContent();
+            return Ok("Запись успешно изменена!");
         }
 
-        // POST: api/Doctors
+        // POST: api/Doctors ONLY ADMIN
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPost]
         public async Task<ActionResult<Doctor>> PostDoctor(Doctor doctor)
@@ -98,24 +113,24 @@ namespace DocService.Controllers
             return CreatedAtAction("GetDoctor", new { id = doctor.Id }, doctor);
         }
 
-        // DELETE: api/Doctors/5
+        // DELETE: api/Doctors/5 ONLY ADMIN
         [HttpDelete("{id}")]
         public async Task<IActionResult> DeleteDoctor(int id)
         {
             if (_context.doctors == null)
             {
-                return NotFound();
+                return NotFound("Записей не найдено");
             }
             var doctor = await _context.doctors.FindAsync(id);
             if (doctor == null)
             {
-                return NotFound();
+                return NotFound($"Запись доктора с ID {id} не найдена");
             }
 
             _context.doctors.Remove(doctor);
             await _context.SaveChangesAsync();
 
-            return NoContent();
+            return Ok("Запись успешно удалена!");
         }
 
         private bool DoctorExists(int id)

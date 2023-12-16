@@ -32,14 +32,26 @@ namespace ServiceMicService.Controllers
         [HttpGet("{id}")]
         public async Task<ActionResult<Service>> GetService(int id)
         {
-            var service = await _context.services.FindAsync(id);
-
-            if (service == null)
+            if (id <= 0)
             {
-                return NotFound();
+                return BadRequest("Неверный идентификатор!");
             }
+            try
+            {
+                var service = await _context.services.FindAsync(id);
 
-            return service;
+                if (service == null)
+                {
+                    return NotFound("Записей не найдено");
+                }
+
+                return service;
+            }
+            catch (Exception)
+            {
+                // Логирование ошибки или другие действия по обработке ошибки
+                return StatusCode(500, "Internal Server Error");
+            }
         }
 
         // PUT: api/Services/5
@@ -49,7 +61,7 @@ namespace ServiceMicService.Controllers
         {
             if (id != service.Id)
             {
-                return BadRequest();
+                return BadRequest($"Данное ID {id} не найдено!");
             }
 
             _context.Entry(service).State = EntityState.Modified;
@@ -62,15 +74,15 @@ namespace ServiceMicService.Controllers
             {
                 if (!ServiceExists(id))
                 {
-                    return NotFound();
+                    return NotFound($"Запись услуги с ID {id} не найдена");
                 }
                 else
                 {
-                    throw;
+                    return StatusCode(409, "Произошел конфликт. Пожалуйста, обновите данные и повторите попытку.");
                 }
             }
 
-            return NoContent();
+            return Ok("Запись успешно изменена!");
         }
 
         // POST: api/Services
@@ -91,13 +103,13 @@ namespace ServiceMicService.Controllers
             var service = await _context.services.FindAsync(id);
             if (service == null)
             {
-                return NotFound();
+                return NotFound($"Запись услуги с ID {id} не найдена");
             }
 
             _context.services.Remove(service);
             await _context.SaveChangesAsync();
 
-            return NoContent();
+            return Ok("Запись успешно удалена!");
         }
 
         private bool ServiceExists(int id)

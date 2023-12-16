@@ -21,43 +21,57 @@ namespace SpecializationService.Controllers
             _context = context;
         }
 
-        // GET: api/Specializations
+        // GET: api/Specializations ONLY ADMIN
         [HttpGet]
         public async Task<ActionResult<IEnumerable<Specialization>>> Getspecials()
         {
           if (_context.specials == null)
           {
-              return NotFound();
+              return NotFound("Записей не найдено");
           }
             return await _context.specials.ToListAsync();
         }
 
-        // GET: api/Specializations/5
+        // GET: api/Specializations/5 ONLY ADMIN
         [HttpGet("{id}")]
         public async Task<ActionResult<Specialization>> GetSpecialization(int id)
         {
-          if (_context.specials == null)
-          {
-              return NotFound();
-          }
-            var specialization = await _context.specials.FindAsync(id);
 
-            if (specialization == null)
+            if (id <= 0)
             {
-                return NotFound();
+                return BadRequest("Неверный идентификатор!");
             }
 
-            return specialization;
+            try
+            {
+                if (_context.specials == null)
+                {
+                    return NotFound("Записей не найдено");
+                }
+                var specialization = await _context.specials.FindAsync(id);
+
+                if (specialization == null)
+                {
+                    return NotFound($"Запись специализации с ID {id} не найдена");
+                }
+
+                return specialization;
+            }
+            catch (Exception)
+            {
+                // Логирование ошибки или другие действия по обработке ошибки
+                return StatusCode(500, "Internal Server Error");
+            }
         }
 
-        // PUT: api/Specializations/5
+        // PUT: api/Specializations/5 ONLY ADMIN
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPut("{id}")]
         public async Task<IActionResult> PutSpecialization(int id, Specialization specialization)
         {
             if (id != specialization.SpecializationId)
             {
-                return BadRequest();
+                return BadRequest($"Данное ID {id} не найдено!");
             }
 
             _context.Entry(specialization).State = EntityState.Modified;
@@ -70,18 +84,18 @@ namespace SpecializationService.Controllers
             {
                 if (!SpecializationExists(id))
                 {
-                    return NotFound();
+                    return NotFound($"Запись специализации с ID {id} не найдена");
                 }
                 else
                 {
-                    throw;
+                    return StatusCode(409, "Произошел конфликт. Пожалуйста, обновите данные и повторите попытку.");
                 }
             }
 
-            return NoContent();
+            return Ok("Запись успешно изменена!");
         }
 
-        // POST: api/Specializations
+        // POST: api/Specializations ONLY ADMIN
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPost]
         public async Task<ActionResult<Specialization>> PostSpecialization(Specialization specialization)
@@ -96,24 +110,24 @@ namespace SpecializationService.Controllers
             return CreatedAtAction("GetSpecialization", new { id = specialization.SpecializationId }, specialization);
         }
 
-        // DELETE: api/Specializations/5
+        // DELETE: api/Specializations/5 ONLY ADMIN
         [HttpDelete("{id}")]
         public async Task<IActionResult> DeleteSpecialization(int id)
         {
             if (_context.specials == null)
             {
-                return NotFound();
+                return NotFound("Записей не найдено");
             }
             var specialization = await _context.specials.FindAsync(id);
             if (specialization == null)
             {
-                return NotFound();
+                return NotFound($"Запись специализации с ID {id} не найдена");
             }
 
             _context.specials.Remove(specialization);
             await _context.SaveChangesAsync();
 
-            return NoContent();
+            return Ok("Запись успешно удалена!");
         }
 
         private bool SpecializationExists(int id)

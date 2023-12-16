@@ -33,9 +33,9 @@ namespace CompositeService.Controllers
             return null;
         }
 
-        //Возвращает список докторов в заданный день недели
-        [HttpGet("shedules/{dayofweek}")]
-        public async Task<ActionResult<List<SheduleCos>>> GetDoctorScheduleByDayAsync(int dayofweek)
+        //Возвращает список докторов в заданный день 
+        [HttpGet("shedules/{date}")]
+        public async Task<ActionResult<List<Doctor>>> GetDoctorScheduleByDateAsync(string date)
         {
             HttpClientHandler clientHandler = new HttpClientHandler();
             clientHandler.ServerCertificateCustomValidationCallback = (sender, cert, chain, sslPolicyErrors) => { return true; };
@@ -47,46 +47,54 @@ namespace CompositeService.Controllers
                 {
                     List<SheduleCos> shedules = await response.Content.ReadFromJsonAsync<List<SheduleCos>>();
 
-                    DayOfWeek targetDay = (DayOfWeek)dayofweek;
+                    // Фильтрация расписания по заданной дате
+                    List<SheduleCos> targetDateSchedules = shedules
+                        .Where(schedule => schedule.Date == date)
+                        .ToList();
 
-                    List<int> doctorIdsWithSchedule = shedules
-                        .Where(schedule => schedule.DayOfWeek == targetDay)
+                    List<int> doctorIdsWithSchedule = targetDateSchedules
                         .Select(schedule => schedule.DoctorId)
                         .Distinct()
                         .ToList();
 
+                    // Запрос информации о докторах
                     var doctorsWithScheduleInfo = doctorIdsWithSchedule
-                .Select(async doctorId =>
-                {
-                    response = await client.GetAsync($"{_doctorServiceAddress}/{doctorId}");
-                    if (response.IsSuccessStatusCode)
+                            .Select(async doctorId =>
                     {
-                        Doctor doctor = await response.Content.ReadFromJsonAsync<Doctor>();
-                        if (doctor != null)
-                        {
-                            return new
+                            response = await client.GetAsync($"{_doctorServiceAddress}/{doctorId}");
+                            if (response.IsSuccessStatusCode)
                             {
-                                doctor.Surname,
-                                doctor.Name,
-                                doctor.SpecName
-                            };
-                        }
-                    }
+                                Doctor doctor = await response.Content.ReadFromJsonAsync<Doctor>();
+                                if (doctor != null)
+                                {
+                                    return new Doctor
+                                    {
+                                        Surname = doctor.Surname,
+                                        Name = doctor.Name,
+                                        Experience = doctor.Experience,
+                                        Post = doctor.Post,
+                                        SpecName = doctor.SpecName
+                                    };
+                                }
+                            }
 
-                    return null;
-                })
-                .Where(doctorTask => doctorTask != null)
-                .Select(doctorTask => doctorTask.Result)
-                .ToList();
+                            return null;
+                        })
+
+                    .Where(doctorTask => doctorTask != null)
+                    .Select(doctorTask => doctorTask.Result)
+                    .ToList();
 
                     return Ok(doctorsWithScheduleInfo);
                 }
             }
+
             return null;
         }
 
+
         //Просмотр расписания доктора
-        [HttpGet("myschedule/{doctorId}")]
+        [HttpGet("scheduleDoc/{doctorId}")]
         public async Task<ActionResult<List<Shedule>>> GetMyScheduleAsync(int doctorId)
         {
             HttpClientHandler clientHandler = new HttpClientHandler();
