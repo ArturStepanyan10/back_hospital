@@ -21,7 +21,9 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MedicalReportService", "Med
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ServiceMicService", "ServiceMicService\ServiceMicService.csproj", "{9FF8F7C5-6B5C-4024-8AE0-315125867A0E}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AdminService", "AdminService\AdminService.csproj", "{12641521-3542-4334-BE1C-352F69EFEC17}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AdminService", "AdminService\AdminService.csproj", "{12641521-3542-4334-BE1C-352F69EFEC17}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UserIdentityService", "UserIdentityService\UserIdentityService.csproj", "{30005705-DB65-47D2-B42C-00F17EF8D6C1}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -69,6 +71,10 @@ Global
 		{12641521-3542-4334-BE1C-352F69EFEC17}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{12641521-3542-4334-BE1C-352F69EFEC17}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{12641521-3542-4334-BE1C-352F69EFEC17}.Release|Any CPU.Build.0 = Release|Any CPU
+		{30005705-DB65-47D2-B42C-00F17EF8D6C1}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{30005705-DB65-47D2-B42C-00F17EF8D6C1}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{30005705-DB65-47D2-B42C-00F17EF8D6C1}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{30005705-DB65-47D2-B42C-00F17EF8D6C1}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
