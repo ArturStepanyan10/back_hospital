@@ -17,6 +17,7 @@ builder.Services.AddDbContext<DataContext>(opt =>
 builder.Services.AddAuthorization();
 
 builder.Services.AddIdentityApiEndpoints<IdentityUser>()
+    .AddRoles<IdentityRole>()
     .AddEntityFrameworkStores<DataContext>();
 
 var app = builder.Build();

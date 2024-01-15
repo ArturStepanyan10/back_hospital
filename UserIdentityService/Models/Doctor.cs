@@ -10,5 +10,6 @@ namespace UserIdentityService.Models
         public int Experience { get; set; }
         public string Post { get; set; }
         public string SpecName { get; set; }
+        public string Role { get; set; }
     }
 }
